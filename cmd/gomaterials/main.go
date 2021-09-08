@@ -24,7 +24,6 @@ const (
 	UOM     = 2
 	OO      = 2
 	RO      = 3
-	WIDTH   = 5
 	BITS    = 64
 	DATA    = "data.csv"
 	BACKLOG = "bl.csv"
@@ -60,11 +59,11 @@ func main() {
 	scheduleTable, count, dates := shipping.ScheduleToTable(scheduleList)
 	_, _ = fmt.Fprintf(&header, "%s\n", dates.String())
 	fmt.Println("Validating shipping...")
-	scheduleTable = ValidateSchedule(scheduleTable)
+	scheduleTable = shipping.ValidateSchedule(scheduleTable)
 	fmt.Println("Converting units...")
-	scheduleTable = ConvertUnits(scheduleTable)
+	scheduleTable = shipping.ConvertUnits(scheduleTable)
 	fmt.Println("Formatting shipping...")
-	schedule := ScheduleToMap(scheduleTable)
+	schedule := shipping.ScheduleToMap(scheduleTable)
 	fmt.Println("Generating report...")
 	CreateReport(data, backlog, hfr, schedule, count)
 	et := time.Since(start)
@@ -106,31 +105,6 @@ func LoadSalesData(S [][]string) map[string]float64 {
 			m[pn] = qty * uom
 		} else {
 			m[pn] = val + qty*uom
-		}
-	}
-	return m
-}
-
-// ScheduleToMap takes the [][]string from ScheduleToTable and returns it as a map
-func ScheduleToMap(T [][]string) map[string][]float64 {
-	tWidth := len(T[0][0:])
-	m := make(map[string][]float64)
-	for _, t := range T[1:] {
-		if v, ok := m[t[PN]]; ok {
-			for j := 1; j < tWidth; j++ {
-				f, err := strconv.ParseFloat(t[j], BITS)
-				utility.CheckError("ParseFloat():", err)
-				v[j-1] += f
-			}
-			m[t[PN]] = v
-		} else {
-			d := make([]float64, tWidth-1)
-			for j := 1; j < tWidth; j++ {
-				f, err := strconv.ParseFloat(t[j], BITS)
-				utility.CheckError("ParseFloat():", err)
-				d[j-1] = f
-			}
-			m[t[PN]] = d
 		}
 	}
 	return m
@@ -180,14 +154,4 @@ func CreateReport(data []Data, backlog, hfr map[string]float64, schedule map[str
 	b, err := f.WriteString(out.String())
 	utility.CheckError("WriteString()", err)
 	fmt.Println("Wrote", b, "bytes to disk.")
-}
-
-func ValidateSchedule(s [][]string) [][]string {
-
-	return s
-}
-
-func ConvertUnits(s [][]string) [][]string {
-
-	return s
 }

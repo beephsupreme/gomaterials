@@ -2,6 +2,8 @@ package shipping
 
 import (
 	"fmt"
+	"github.com/beephsupreme/gomaterials/pkg/utility"
+	"strconv"
 	"strings"
 )
 
@@ -57,4 +59,39 @@ func ScheduleToTable(S []string) ([][]string, int, strings.Builder) {
 		row = []string{}
 	}
 	return data, numDates, header
+}
+
+// ScheduleToMap takes the [][]string from ScheduleToTable and returns it as a map
+func ScheduleToMap(T [][]string) map[string][]float64 {
+	tWidth := len(T[0][0:])
+	m := make(map[string][]float64)
+	for _, t := range T[1:] {
+		if v, ok := m[t[0]]; ok {
+			for j := 1; j < tWidth; j++ {
+				f, err := strconv.ParseFloat(t[j], 64)
+				utility.CheckError("ParseFloat():", err)
+				v[j-1] += f
+			}
+			m[t[0]] = v
+		} else {
+			d := make([]float64, tWidth-1)
+			for j := 1; j < tWidth; j++ {
+				f, err := strconv.ParseFloat(t[j], 64)
+				utility.CheckError("ParseFloat():", err)
+				d[j-1] = f
+			}
+			m[t[0]] = d
+		}
+	}
+	return m
+}
+
+func ValidateSchedule(s [][]string) [][]string {
+
+	return s
+}
+
+func ConvertUnits(s [][]string) [][]string {
+
+	return s
 }
