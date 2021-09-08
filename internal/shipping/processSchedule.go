@@ -2,13 +2,10 @@ package shipping
 
 import (
 	"fmt"
+	"github.com/beephsupreme/gomaterials/config"
 	"github.com/beephsupreme/gomaterials/pkg/utility"
 	"strconv"
 	"strings"
-)
-
-const (
-	WIDTH = 5
 )
 
 // ScheduleToTable converts the array from GetSchdule into a [][]string
@@ -20,7 +17,7 @@ func ScheduleToTable(S []string) ([][]string, int, strings.Builder) {
 	var header strings.Builder
 	// Find start of regular data
 	for firstLine, td = range S {
-		if td == "TOKISTAR CODE" {
+		if td == config.FIRSTLINE_TEXT {
 			break
 		}
 	}
@@ -42,8 +39,8 @@ func ScheduleToTable(S []string) ([][]string, int, strings.Builder) {
 	// Remove uneeded first lines
 	S = S[firstLine:]
 	// Convert shipping from data []string to table [][]string
-	for i := 0; i < len(S)-(numDates+WIDTH); i += numDates + WIDTH {
-		for j := 0; j < numDates+WIDTH; j++ {
+	for i := 0; i < len(S)-(numDates+config.WIDTH); i += numDates + config.WIDTH {
+		for j := 0; j < numDates+config.WIDTH; j++ {
 			// Ignore 2nd through 5th columns
 			if j == 1 || j == 2 || j == 3 || j == 4 {
 				continue

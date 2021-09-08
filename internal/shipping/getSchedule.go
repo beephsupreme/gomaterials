@@ -11,7 +11,7 @@ func GetSchedule(urlToTable string) []string {
 	var td []string
 	c := colly.NewCollector()
 	c.OnError(func(_ *colly.Response, err error) {
-		fmt.Println("Error retrieving shipping:", err.Error())
+		fmt.Println("GetSchedule():", err.Error())
 	})
 	c.OnHTML("td", func(e *colly.HTMLElement) {
 		td = append(td, e.Text)
