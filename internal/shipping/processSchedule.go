@@ -2,7 +2,7 @@ package shipping
 
 import (
 	"fmt"
-	"github.com/beephsupreme/gomaterials/config"
+	"github.com/beephsupreme/gomaterials/internal/config"
 	"github.com/beephsupreme/gomaterials/pkg/utility"
 	"strconv"
 	"strings"
