@@ -17,6 +17,7 @@ const (
 	TRANSLATE      = "/Users/michael/projects/gomaterials/assets/data/translate.csv"
 	TLI            = 1
 	TOKI           = 0
+	FACTOR         = 1
 	URL            = "https://www.toki.co.jp/purchasing/TLIHTML.files/sheet001.htm"
 	OUTFILE        = "./assets/data/materials.csv"
 	HEADER         = "Part Number,On Hand,Backlog,Released,HFR,On Order,T-Avail,R-Avail,Reorder"

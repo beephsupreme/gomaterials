@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/beephsupreme/gomaterials/internal/config"
 	"github.com/beephsupreme/gomaterials/internal/models"
@@ -18,6 +19,7 @@ func Build(data []models.Data,
 	sb, hdr *strings.Builder) {
 	//create materials table using strings.Builder
 	fmt.Println("Building report...")
+	_, _ = fmt.Fprintf(sb, "%s\n", time.Now().Format("2006-01-02"))
 	_, _ = fmt.Fprintf(sb, "%s", hdr.String())
 	for _, r := range data {
 		pn := r.PartNum

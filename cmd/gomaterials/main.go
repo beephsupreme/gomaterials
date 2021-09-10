@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"strings"
 	"time"
 
@@ -26,13 +25,10 @@ func main() {
 	hfr := sales.LoadData(utility.LoadFile(config.HFR))
 	validate := utility.LoadFile(config.VALIDATE)
 	translate := utility.LoadFile(config.TRANSLATE)
-	if translate == nil {
-		log.Fatal("translate is nil")
-	}
 	scheduleTable, count, dates := shipping.MakeTable(shipping.Retrieve(config.URL))
 	_, _ = fmt.Fprintf(&header, "%s\n", dates.String())
 	scheduleTable = shipping.Validate(scheduleTable, validate)
-	scheduleTable = shipping.Translate(scheduleTable)
+	scheduleTable = shipping.Translate(scheduleTable, translate, count)
 	schedule := shipping.MakeMap(scheduleTable)
 	report.Build(data, backlog, hfr, schedule, count, &out, &header)
 	et := time.Since(start)

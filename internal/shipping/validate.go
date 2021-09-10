@@ -15,19 +15,19 @@ func Validate(S, V [][]string) [][]string {
 	for _, pn := range S[1:] {
 		found := false
 		for i := 1; i < len(s); i++ {
-			if pn[0] == s[i] {
+			if pn[config.PN] == s[i] {
 				found = true
 				break
 			}
 		}
-		if strings.Contains(pn[0], "RV-SEALANT") {
+		if strings.Contains(pn[config.PN], "RV-SEALANT") {
 			found = true
 		}
 		if !found {
-			if _, ok := m[pn[0]]; !ok {
-				log.Fatal("[shipping.Validate() item not found]: ", pn[0])
+			if _, ok := m[pn[config.PN]]; !ok {
+				log.Fatal("[shipping.Validate() item not found]: ", pn[config.PN])
 			} else {
-				//fmt.Println("found conversion")
+				pn[config.PN] = m[pn[config.PN]]
 			}
 		}
 	}
