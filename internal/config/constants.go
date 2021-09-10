@@ -10,10 +10,11 @@ const (
 	UOM            = 2
 	OO             = 2
 	RO             = 3
-	DATA           = "./assets/data/data.csv"
-	BACKLOG        = "./assets/data/bl.csv"
-	HFR            = "./assets/data/hfr.csv"
-	VALIDATE       = "./assets/data/validate.csv"
+	DATA           = "/Users/michael/projects/gomaterials/assets/data/data.csv"
+	BACKLOG        = "/Users/michael/projects/gomaterials/assets/data/bl.csv"
+	HFR            = "/Users/michael/projects/gomaterials/assets/data/hfr.csv"
+	VALIDATE       = "/Users/michael/projects/gomaterials/assets/data/validate.csv"
+	TRANSLATE      = "/Users/michael/projects/gomaterials/assets/data/translate.csv"
 	TLI            = 1
 	TOKI           = 0
 	URL            = "https://www.toki.co.jp/purchasing/TLIHTML.files/sheet001.htm"

@@ -84,15 +84,3 @@ func MakeMap(T [][]string) map[string][]float64 {
 	}
 	return m
 }
-
-// Validate checks for invalid part numbers corrects them
-func Validate(s [][]string) [][]string {
-	fmt.Println("Validating...")
-	return s
-}
-
-// Translate converts Toki units into TLI units
-func Translate(s [][]string) [][]string {
-	fmt.Println("Translating...")
-	return s
-}
