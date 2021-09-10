@@ -12,14 +12,14 @@ import (
 func LoadFile(filename string) [][]string {
 	fmt.Println("Loading file:", filepath.Base(filename))
 	f, err := os.Open(filename)
-	CheckError("utility.LoadFile.Open()", err)
+	CheckError("[utility.LoadFile.Open()] ", err)
 	defer func(f *os.File) {
 		err := f.Close()
-		CheckError("utility.LoadFile.Close()", err)
+		CheckError("[utility.LoadFile.Close()] ", err)
 	}(f)
 	r := csv.NewReader(f)
 	t, err := r.ReadAll()
-	CheckError("utility.LoadFile.ReadAll()", err)
+	CheckError("[utility.LoadFile.ReadAll()] ", err)
 	return t
 }
 

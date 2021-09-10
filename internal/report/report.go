@@ -49,14 +49,14 @@ func Build(data []models.Data,
 	}
 
 	f, err := os.Create(config.OUTFILE)
-	utility.CheckError("report.Build.Open()", err)
+	utility.CheckError("[report.Build.Open()] ", err)
 	defer func(f *os.File) {
 		err := f.Close()
 		if err != nil {
-			utility.CheckError("report.Build.Close()", err)
+			utility.CheckError("[report.Build.Close()] ", err)
 		}
 	}(f)
 	b, err := f.WriteString(sb.String())
-	utility.CheckError("report.Build.WriteString(sb)", err)
+	utility.CheckError("[report.Build.WriteString(sb)] ", err)
 	fmt.Println("Wrote", b, "bytes to disk.")
 }

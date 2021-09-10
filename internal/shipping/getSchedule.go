@@ -13,12 +13,12 @@ func Retrieve(urlToTable string) []string {
 	fmt.Println("Retrieving schedule...")
 	c := colly.NewCollector()
 	c.OnError(func(_ *colly.Response, err error) {
-		fmt.Println("shipping.Retrieve.colly():", err.Error())
+		fmt.Println("[shipping.Retrieve.colly()] ", err.Error())
 	})
 	c.OnHTML("td", func(e *colly.HTMLElement) {
 		td = append(td, e.Text)
 	})
 	err := c.Visit(urlToTable)
-	utility.CheckError("shipping.Retrieve.colly.Visit():", err)
+	utility.CheckError("[shipping.Retrieve.colly.Visit()] ", err)
 	return td
 }
