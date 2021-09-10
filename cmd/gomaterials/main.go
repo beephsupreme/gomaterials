@@ -33,4 +33,5 @@ func main() {
 	report.Build(data, backlog, hfr, schedule, count, &out, &header)
 	et := time.Since(start)
 	fmt.Printf("Task complete! (%.3g seconds)\n", et.Seconds())
+	utility.PrintMemUsage()
 }
