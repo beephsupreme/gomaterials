@@ -2,6 +2,7 @@ package shipping
 
 import (
 	"fmt"
+
 	"github.com/beephsupreme/gomaterials/pkg/utility"
 	"github.com/gocolly/colly"
 )
@@ -9,6 +10,9 @@ import (
 // GetSchedule downloads a table from the internet and stores is as an array of all cells
 func GetSchedule(urlToTable string) []string {
 	var td []string
+
+	fmt.Println("Retrieving shipping schedule...")
+
 	c := colly.NewCollector()
 	c.OnError(func(_ *colly.Response, err error) {
 		fmt.Println("GetSchedule():", err.Error())
@@ -17,7 +21,7 @@ func GetSchedule(urlToTable string) []string {
 		td = append(td, e.Text)
 	})
 	err := c.Visit(urlToTable)
-	utility.CheckError("colly.Visit():", err)
+	utility.CheckError("shipping.GetSchedule.colly.Visit():", err)
 
 	return td
 }

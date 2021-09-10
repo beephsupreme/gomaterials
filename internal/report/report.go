@@ -6,11 +6,12 @@ import (
 	"strings"
 
 	"github.com/beephsupreme/gomaterials/internal/config"
+	"github.com/beephsupreme/gomaterials/internal/models"
 	"github.com/beephsupreme/gomaterials/pkg/utility"
 )
 
 // CreateReport creates a strings.Builder object which is written to a csv file
-func CreateReport(data []Data,
+func CreateReport(data []models.Data,
 	backlog, hfr map[string]float64,
 	schedule map[string][]float64,
 	count int,

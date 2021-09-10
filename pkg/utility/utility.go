@@ -9,20 +9,20 @@ import (
 // LoadFile reads a csv file and returns it as a [][]string
 func LoadFile(filename string) [][]string {
 	f, err := os.Open(filename)
-	CheckError("os.Open():", err)
+	CheckError("utility.LoadFile.Open()", err)
 	defer func(f *os.File) {
 		err := f.Close()
-		CheckError("f.Close():", err)
+		CheckError("utility.LoadFile.Close()", err)
 	}(f)
 	r := csv.NewReader(f)
 	t, err := r.ReadAll()
-	CheckError("d.ReadAll()", err)
+	CheckError("utility.LoadFile.ReadAll()", err)
 	return t
 }
 
 // CheckError checks for an error and halts program if error found
-func CheckError(source string, err error) {
+func CheckError(msg string, err error) {
 	if err != nil {
-		log.Fatal(source, err.Error())
+		log.Fatal(msg, err.Error())
 	}
 }
