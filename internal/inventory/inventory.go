@@ -15,7 +15,7 @@ func LoadData(D [][]string) []models.Data {
 	var data []models.Data
 	var err error
 
-	fmt.Println("Loading Inventory Data...")
+	fmt.Println("Processing...")
 	for i := 1; i < len(D); i++ {
 		d.PartNum = D[i][config.PN]
 		d.OnHand, err = strconv.ParseFloat(D[i][config.OH], config.BITS)

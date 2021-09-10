@@ -2,12 +2,15 @@ package utility
 
 import (
 	"encoding/csv"
+	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 // LoadFile reads a csv file and returns it as a [][]string
 func LoadFile(filename string) [][]string {
+	fmt.Println("Loading file:", filepath.Base(filename))
 	f, err := os.Open(filename)
 	CheckError("utility.LoadFile.Open()", err)
 	defer func(f *os.File) {

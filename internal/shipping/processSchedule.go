@@ -9,13 +9,14 @@ import (
 	"github.com/beephsupreme/gomaterials/pkg/utility"
 )
 
-// ScheduleToTable converts the array from GetSchdule into a [][]string
-func ScheduleToTable(S []string) ([][]string, int, strings.Builder) {
+// MakeTable converts []string into [][]string
+func MakeTable(S []string) ([][]string, int, strings.Builder) {
 	var data [][]string
 	var row []string
 	var td string
 	var firstLine, firstDate, numDates int
 	var header strings.Builder
+	fmt.Println("Processing...")
 	// Find start of regular data
 	for firstLine, td = range S {
 		if td == config.FIRSTLINE_TEXT {
@@ -59,15 +60,15 @@ func ScheduleToTable(S []string) ([][]string, int, strings.Builder) {
 	return data, numDates, header
 }
 
-// ScheduleToMap takes the [][]string from ScheduleToTable and returns it as a map
-func ScheduleToMap(T [][]string) map[string][]float64 {
+// MakeMap takes the [][]string from ScheduleToTable and returns it as a map
+func MakeMap(T [][]string) map[string][]float64 {
 	tWidth := len(T[0][0:])
 	m := make(map[string][]float64)
 	for _, t := range T[1:] {
 		if v, ok := m[t[0]]; ok {
 			for j := 1; j < tWidth; j++ {
 				f, err := strconv.ParseFloat(t[j], config.BITS)
-				utility.CheckError("ParseFloat():", err)
+				utility.CheckError("shipping.MakeMap.ParseFloat(if):", err)
 				v[j-1] += f
 			}
 			m[t[0]] = v
@@ -75,7 +76,7 @@ func ScheduleToMap(T [][]string) map[string][]float64 {
 			d := make([]float64, tWidth-1)
 			for j := 1; j < tWidth; j++ {
 				f, err := strconv.ParseFloat(t[j], config.BITS)
-				utility.CheckError("ParseFloat():", err)
+				utility.CheckError("shipping.MakeMap.ParseFloat(else):", err)
 				d[j-1] = f
 			}
 			m[t[0]] = d
@@ -84,12 +85,14 @@ func ScheduleToMap(T [][]string) map[string][]float64 {
 	return m
 }
 
-func ValidateSchedule(s [][]string) [][]string {
-
+// Validate checks for invalid part numbers corrects them
+func Validate(s [][]string) [][]string {
+	fmt.Println("Validating...")
 	return s
 }
 
-func ConvertUnits(s [][]string) [][]string {
-
+// Translate converts Toki units into TLI units
+func Translate(s [][]string) [][]string {
+	fmt.Println("Translating...")
 	return s
 }

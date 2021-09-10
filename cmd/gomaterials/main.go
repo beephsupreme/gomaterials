@@ -15,7 +15,7 @@ import (
 
 func main() {
 	start := time.Now()
-	fmt.Println("Materials 12.0, (c) 2021 Michael N. Rowsey")
+	fmt.Println("Materials 4.1 \u00A9 2021 Michael N. Rowsey")
 	var header, dates, out strings.Builder
 	var count int
 	out.Grow(128)
@@ -23,20 +23,12 @@ func main() {
 	data := inventory.LoadData(utility.LoadFile(config.DATA))
 	backlog := sales.LoadData(utility.LoadFile(config.BACKLOG))
 	hfr := sales.LoadData(utility.LoadFile(config.HFR))
-	scheduleList := shipping.GetSchedule(config.URL)
-
-	fmt.Println("Processing shipping schedule...")
-	scheduleTable, count, dates := shipping.ScheduleToTable(scheduleList)
+	scheduleTable, count, dates := shipping.MakeTable(shipping.Retrieve(config.URL))
 	_, _ = fmt.Fprintf(&header, "%s\n", dates.String())
-
-	fmt.Println("Validating shipping schedule...")
-	scheduleTable = shipping.ValidateSchedule(scheduleTable)
-	scheduleTable = shipping.ConvertUnits(scheduleTable)
-	schedule := shipping.ScheduleToMap(scheduleTable)
-
-	fmt.Println("Generating report...")
-	report.CreateReport(data, backlog, hfr, schedule, count, &out, &header)
-
+	scheduleTable = shipping.Validate(scheduleTable)
+	scheduleTable = shipping.Translate(scheduleTable)
+	schedule := shipping.MakeMap(scheduleTable)
+	report.Build(data, backlog, hfr, schedule, count, &out, &header)
 	et := time.Since(start)
 	fmt.Printf("Task complete! (%.3g seconds)\n", et.Seconds())
 }

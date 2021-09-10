@@ -12,7 +12,7 @@ import (
 func LoadData(S [][]string) map[string]float64 {
 	m := make(map[string]float64)
 
-	fmt.Println("Loading Sales Data...")
+	fmt.Println("Processing...")
 	for i := 1; i < len(S); i++ {
 		pn := S[i][config.PN]
 		qty, err := strconv.ParseFloat(S[i][config.QTY], config.BITS)
