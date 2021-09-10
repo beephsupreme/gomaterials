@@ -2,10 +2,11 @@ package shipping
 
 import (
 	"fmt"
-	"github.com/beephsupreme/gomaterials/internal/config"
-	"github.com/beephsupreme/gomaterials/pkg/utility"
 	"strconv"
 	"strings"
+
+	"github.com/beephsupreme/gomaterials/internal/config"
+	"github.com/beephsupreme/gomaterials/pkg/utility"
 )
 
 // ScheduleToTable converts the array from GetSchdule into a [][]string
@@ -65,7 +66,7 @@ func ScheduleToMap(T [][]string) map[string][]float64 {
 	for _, t := range T[1:] {
 		if v, ok := m[t[0]]; ok {
 			for j := 1; j < tWidth; j++ {
-				f, err := strconv.ParseFloat(t[j], 64)
+				f, err := strconv.ParseFloat(t[j], config.BITS)
 				utility.CheckError("ParseFloat():", err)
 				v[j-1] += f
 			}
@@ -73,7 +74,7 @@ func ScheduleToMap(T [][]string) map[string][]float64 {
 		} else {
 			d := make([]float64, tWidth-1)
 			for j := 1; j < tWidth; j++ {
-				f, err := strconv.ParseFloat(t[j], 64)
+				f, err := strconv.ParseFloat(t[j], config.BITS)
 				utility.CheckError("ParseFloat():", err)
 				d[j-1] = f
 			}
