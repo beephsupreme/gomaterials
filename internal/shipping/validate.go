@@ -3,6 +3,7 @@ package shipping
 import (
 	"fmt"
 	"log"
+	"strings"
 
 	"github.com/beephsupreme/gomaterials/internal/config"
 )
@@ -19,11 +20,14 @@ func Validate(S, V [][]string) [][]string {
 				break
 			}
 		}
+		if strings.Contains(pn[0], "RV-SEALANT") {
+			found = true
+		}
 		if !found {
 			if _, ok := m[pn[0]]; !ok {
 				log.Fatal("[shipping.Validate() item not found]: ", pn[0])
 			} else {
-				fmt.Println("found conversion")
+				//fmt.Println("found conversion")
 			}
 		}
 	}
