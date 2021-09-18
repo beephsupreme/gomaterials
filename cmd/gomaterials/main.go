@@ -16,6 +16,13 @@ import (
 func main() {
 	start := time.Now()
 	fmt.Println("Materials 4.1 \u00A9 2021 Michael N. Rowsey")
+	run()
+	et := time.Since(start)
+	fmt.Printf("Task complete! (%.3g seconds)\n", et.Seconds())
+	utility.PrintMemUsage()
+}
+
+func run() {
 	var header, dates, out strings.Builder
 	var count int
 	out.Grow(128)
@@ -31,7 +38,4 @@ func main() {
 	scheduleTable = shipping.Translate(scheduleTable, translate, count)
 	schedule := shipping.MakeMap(scheduleTable)
 	report.Build(data, backlog, hfr, schedule, count, &out, &header)
-	et := time.Since(start)
-	fmt.Printf("Task complete! (%.3g seconds)\n", et.Seconds())
-	utility.PrintMemUsage()
 }

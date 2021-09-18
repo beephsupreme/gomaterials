@@ -35,13 +35,13 @@ func MakeTable(S []string) ([][]string, int, strings.Builder) {
 	// Copy shipping dates to correct location
 	// Also copy to global var 'header' [bad but convienient]
 	for i := 0; i < numDates; i++ {
-		S[firstLine+numDates+i] = S[firstLine-numDates+i]
+		S[firstLine+config.WIDTH+i] = S[firstLine-numDates+i]
 		_, _ = fmt.Fprintf(&header, ",%s", S[firstLine-numDates+i])
 	}
 	// Remove uneeded first lines
 	S = S[firstLine:]
 	// Convert shipping from data []string to table [][]string
-	for i := 0; i < len(S)-(numDates+config.WIDTH); i += numDates + config.WIDTH {
+	for i := 0; i < len(S)-(numDates+config.WIDTH); i += numDates + config.WIDTH { // ******** CHECK THIS ******
 		for j := 0; j < numDates+config.WIDTH; j++ {
 			// Ignore 2nd through 5th columns
 			if j == 1 || j == 2 || j == 3 || j == 4 {

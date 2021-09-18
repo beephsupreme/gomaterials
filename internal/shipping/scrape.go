@@ -7,7 +7,8 @@ import (
 	"github.com/gocolly/colly"
 )
 
-// Retrieve downloads an html table stores the 'td's as an []string
+// Retrieve scrapes the Toki Corp. shipping schedule.
+// It grabs all 'td' elements an stores themas a []string
 func Retrieve(urlToTable string) []string {
 	var td []string
 	fmt.Println("Retrieving schedule...")

@@ -9,7 +9,8 @@ import (
 	"github.com/beephsupreme/gomaterials/pkg/utility"
 )
 
-// LoadInventoryData takes [][]string and returns an array of structs
+// LoadData takes [][]string created from accounting
+// system export (data.csv) and loads into a 'Data' struct
 func LoadData(D [][]string) []models.Data {
 	var d models.Data
 	var data []models.Data
