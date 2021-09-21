@@ -13,6 +13,8 @@ import (
 	"github.com/beephsupreme/gomaterials/pkg/utility"
 )
 
+var app config.AppConfig
+
 func main() {
 	start := time.Now()
 	fmt.Println("Materials 4.1 \u00A9 2021 Michael N. Rowsey")
