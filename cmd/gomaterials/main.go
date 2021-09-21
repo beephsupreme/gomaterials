@@ -17,8 +17,8 @@ var app config.AppConfig
 
 func main() {
 	start := time.Now()
-	config.RunConfig(&app)
 	fmt.Println("Materials 4.1 \u00A9 2021 Michael N. Rowsey")
+	setup()
 	run()
 	et := time.Since(start)
 	fmt.Printf("Task complete! (%.3g seconds)\n", et.Seconds())
@@ -41,4 +41,11 @@ func run() {
 	scheduleTable = shipping.Translate(scheduleTable, translate, count)
 	schedule := shipping.MakeMap(scheduleTable)
 	report.Build(data, backlog, hfr, schedule, count, &out, &header)
+}
+
+func setup() {
+	config.LoadConfig(&app)
+	inventory.LoadConfig(&app)
+	sales.LoadConfig(&app)
+	shipping.LoadConfig(&app)
 }

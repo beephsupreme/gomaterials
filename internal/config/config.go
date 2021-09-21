@@ -34,7 +34,7 @@ type AppConfig struct {
 	UOM             int `json:"UOM"`
 }
 
-func RunConfig(app *AppConfig) {
+func LoadConfig(app *AppConfig) {
 
 	// then config file settings
 	//var a AppConfig

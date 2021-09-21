@@ -8,6 +8,8 @@ import (
 	"github.com/beephsupreme/gomaterials/pkg/utility"
 )
 
+var app *config.AppConfig
+
 // LoadData takes [][]string and returns a map[string]float64
 func LoadData(S [][]string) map[string]float64 {
 	m := make(map[string]float64)
@@ -26,4 +28,8 @@ func LoadData(S [][]string) map[string]float64 {
 		}
 	}
 	return m
+}
+
+func LoadConfig(a *config.AppConfig) {
+	app = a
 }

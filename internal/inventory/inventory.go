@@ -9,6 +9,8 @@ import (
 	"github.com/beephsupreme/gomaterials/pkg/utility"
 )
 
+var app *config.AppConfig
+
 // LoadData takes [][]string created from accounting
 // system export (data.csv) and loads into a 'Data' struct
 func LoadData(D [][]string) []models.Data {
@@ -18,14 +20,18 @@ func LoadData(D [][]string) []models.Data {
 
 	fmt.Println("Processing...")
 	for i := 1; i < len(D); i++ {
-		d.PartNum = D[i][config.PN]
-		d.OnHand, err = strconv.ParseFloat(D[i][config.OH], config.BITS)
+		d.PartNum = D[i][app.PN]
+		d.OnHand, err = strconv.ParseFloat(D[i][config.OH], app.Bits)
 		utility.CheckError("[inventory.LoadData.ParseFloat(OnHand)] ", err)
-		d.OnOrder, err = strconv.ParseFloat(D[i][config.OO], config.BITS)
+		d.OnOrder, err = strconv.ParseFloat(D[i][config.OO], app.Bits)
 		utility.CheckError("[inventory.LoadData.ParseFloat(OnOrder)] ", err)
-		d.ReOrder, err = strconv.ParseFloat(D[i][config.RO], config.BITS)
+		d.ReOrder, err = strconv.ParseFloat(D[i][config.RO], app.Bits)
 		utility.CheckError("[inventory.LoadData.ParseFloat(ReOrder)] ", err)
 		data = append(data, d)
 	}
 	return data
+}
+
+func LoadConfig(a *config.AppConfig) {
+	app = a
 }
