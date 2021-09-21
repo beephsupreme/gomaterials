@@ -3,13 +3,13 @@ package config
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
-
-	"github.com/beephsupreme/gomaterials/pkg/utility"
 )
 
 type AppConfig struct {
 	DataPath        string `json:"DataPath"`
+	Debug           bool   `json:"Debug"`
 	Backlog         string `json:"Backlog"`
 	Data            string `json:"Data"`
 	Hfr             string `json:"Hfr"`
@@ -40,34 +40,36 @@ func RunConfig(app *AppConfig) {
 	//var a AppConfig
 	content, err := os.ReadFile("/Users/michael/Dropbox/gomaterials/assets/data/config.json")
 	if err != nil {
-		utility.CheckError("opening config file", err)
+		log.Fatal("opening config file", err)
 	}
 
 	err = json.Unmarshal(content, app)
 	if err != nil {
-		utility.CheckError("unmarshalling config file", err)
+		log.Fatal("unmarshalling config file", err)
 	}
 
-	fmt.Println("DataPath: ", app.DataPath)
-	fmt.Println("Backlog: ", app.Backlog)
-	fmt.Println("Data: ", app.Data)
-	fmt.Println("Hfr: ", app.Hfr)
-	fmt.Println("Outfile: ", app.Outfile)
-	fmt.Println("Translate: ", app.Translate)
-	fmt.Println("Validate: ", app.Validate)
-	fmt.Println("ScheduleURL: ", app.ScheduleURL)
-	fmt.Println("Header: ", app.Header)
-	fmt.Println("FirstLineText: ", app.FirstLineText)
-	fmt.Println("Factor: ", app.Factor)
-	fmt.Println("Bits: ", app.Bits)
-	fmt.Println("ScheduleWidth: ", app.ScheduleWidth)
-	fmt.Println("PN: ", app.PN)
-	fmt.Println("OH: ", app.OH)
-	fmt.Println("OO: ", app.OO)
-	fmt.Println("RO: ", app.RO)
-	fmt.Println("QTY: ", app.QTY)
-	fmt.Println("TLI: ", app.TLI)
-	fmt.Println("TOKI: ", app.TOKI)
-	fmt.Println("UOM: ", app.UOM)
-
+	if app.Debug {
+		fmt.Println("DataPath: ", app.DataPath)
+		fmt.Println("Debug: ", app.Debug)
+		fmt.Println("Backlog: ", app.Backlog)
+		fmt.Println("Data: ", app.Data)
+		fmt.Println("Hfr: ", app.Hfr)
+		fmt.Println("Outfile: ", app.Outfile)
+		fmt.Println("Translate: ", app.Translate)
+		fmt.Println("Validate: ", app.Validate)
+		fmt.Println("ScheduleURL: ", app.ScheduleURL)
+		fmt.Println("Header: ", app.Header)
+		fmt.Println("FirstLineText: ", app.FirstLineText)
+		fmt.Println("Factor: ", app.Factor)
+		fmt.Println("Bits: ", app.Bits)
+		fmt.Println("ScheduleWidth: ", app.ScheduleWidth)
+		fmt.Println("PN: ", app.PN)
+		fmt.Println("OH: ", app.OH)
+		fmt.Println("OO: ", app.OO)
+		fmt.Println("RO: ", app.RO)
+		fmt.Println("QTY: ", app.QTY)
+		fmt.Println("TLI: ", app.TLI)
+		fmt.Println("TOKI: ", app.TOKI)
+		fmt.Println("UOM: ", app.UOM)
+	}
 }
