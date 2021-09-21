@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"strings"
-	"time"
 
 	"github.com/beephsupreme/gomaterials/internal/config"
 	"github.com/beephsupreme/gomaterials/internal/inventory"
@@ -15,13 +14,17 @@ import (
 
 var app config.AppConfig
 
+// func main() {
+// 	start := time.Now()
+// 	fmt.Println("Materials 4.1 \u00A9 2021 Michael N. Rowsey")
+// 	run()
+// 	et := time.Since(start)
+// 	fmt.Printf("Task complete! (%.3g seconds)\n", et.Seconds())
+// 	utility.PrintMemUsage()
+// }
+
 func main() {
-	start := time.Now()
-	fmt.Println("Materials 4.1 \u00A9 2021 Michael N. Rowsey")
-	run()
-	et := time.Since(start)
-	fmt.Printf("Task complete! (%.3g seconds)\n", et.Seconds())
-	utility.PrintMemUsage()
+	config.RunConfig(&app)
 }
 
 func run() {
