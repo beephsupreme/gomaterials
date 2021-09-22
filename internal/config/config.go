@@ -10,6 +10,7 @@ import (
 
 // AppConfig is used to share data throughout the app
 type AppConfig struct {
+	AppVersion      string `json:"Appversion"`
 	DataPath        string `json:"DataPath"`
 	Debug           bool   `json:"Debug"`
 	Backlog         string `json:"Backlog"`
@@ -54,6 +55,7 @@ func LoadConfig(app *AppConfig) {
 	_, _ = fmt.Fprintf(&app.MainHeader, "%s", app.Header)
 
 	if app.Debug {
+		fmt.Println("AppVersion: ", app.AppVersion)
 		fmt.Println("DataPath: ", app.DataPath)
 		fmt.Println("Debug: ", app.Debug)
 		fmt.Println("Backlog: ", app.Backlog)

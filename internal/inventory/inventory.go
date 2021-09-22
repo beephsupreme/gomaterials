@@ -1,7 +1,6 @@
 package inventory
 
 import (
-	"fmt"
 	"strconv"
 
 	"github.com/beephsupreme/gomaterials/helpers"
@@ -22,7 +21,6 @@ func LoadData() []models.Data {
 
 	D = helpers.LoadFile(app.Data)
 
-	fmt.Println("Processing...")
 	for i := 1; i < len(D); i++ {
 		d.PartNum = D[i][app.PN]
 		d.OnHand, err = strconv.ParseFloat(D[i][app.OH], app.Bits)

@@ -15,7 +15,7 @@ var app *config.AppConfig
 // LoadFile reads a csv file and returns it as a [][]string
 func LoadFile(filename string) [][]string {
 
-	fmt.Println("Loading file:", filename)
+	fmt.Println("Loading ", filename)
 	f, err := os.Open(app.DataPath + filename)
 	CheckError("[helpers.LoadFile.Open()] ", err)
 	defer func(f *os.File) {

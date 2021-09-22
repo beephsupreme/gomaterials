@@ -14,7 +14,7 @@ func MakeTable(S []string) [][]string {
 	var row []string
 	var td string
 	var firstLine, firstDate int
-	fmt.Println("Processing...")
+
 	// Find start of regular data
 	for firstLine, td = range S {
 		if td == app.FirstLineText {

@@ -1,7 +1,6 @@
 package shipping
 
 import (
-	"fmt"
 	"log"
 	"strings"
 
@@ -10,8 +9,6 @@ import (
 
 // Validate checks for invalid part numbers corrects them
 func Validate(S [][]string) [][]string {
-
-	fmt.Println("Validating...")
 
 	V := helpers.LoadFile(app.Validate)
 

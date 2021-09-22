@@ -53,8 +53,6 @@ func Build(data []models.Data, backlog, hfr map[string]float64, schedule map[str
 		_, _ = fmt.Fprintf(&sb, "%s", "\n")
 	}
 
-	fmt.Println("Writing report to disk...")
-
 	f, err := os.Create(app.DataPath + app.Outfile)
 	helpers.CheckError("[report.Build.Open()] ", err)
 	defer func(f *os.File) {

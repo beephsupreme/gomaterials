@@ -11,7 +11,7 @@ import (
 // It grabs all 'td' elements an stores themas a []string
 func Retrieve(urlToTable string) []string {
 	var td []string
-	fmt.Println("Retrieving schedule...")
+	fmt.Println("Retrieving", app.ScheduleURL)
 	c := colly.NewCollector()
 	c.OnError(func(_ *colly.Response, err error) {
 		fmt.Println("[shipping.Retrieve.colly()] ", err.Error())

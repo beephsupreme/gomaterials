@@ -1,7 +1,6 @@
 package sales
 
 import (
-	"fmt"
 	"strconv"
 
 	"github.com/beephsupreme/gomaterials/helpers"
@@ -17,7 +16,6 @@ func LoadData(filename string) map[string]float64 {
 
 	m := make(map[string]float64)
 
-	fmt.Println("Processing...")
 	for i := 1; i < len(S); i++ {
 		pn := S[i][app.PN]
 		qty, err := strconv.ParseFloat(S[i][app.QTY], app.Bits)

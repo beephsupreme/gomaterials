@@ -16,12 +16,14 @@ var app config.AppConfig
 
 func main() {
 	start := time.Now()
-	fmt.Println("Materials 4.2 \u00A9 2021 Michael N. Rowsey")
 	setup()
+	fmt.Println(app.AppVersion)
 	run()
 	et := time.Since(start)
-	fmt.Printf("Task complete! (%.3g seconds)\n", et.Seconds())
-	helpers.PrintMemUsage()
+	if app.Debug {
+		fmt.Printf("ET: %.3g seconds\n", et.Seconds())
+		helpers.PrintMemUsage()
+	}
 }
 
 func run() {
