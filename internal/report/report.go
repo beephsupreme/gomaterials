@@ -14,17 +14,16 @@ import (
 var app *config.AppConfig
 
 // CreateReport creates a strings.Builder object which is written to a csv file
-func Build(data []models.Data,
-	backlog, hfr map[string]float64,
-	schedule map[string][]float64) {
-	//create materials table using strings.Builder
+func Build(data []models.Data, backlog, hfr map[string]float64, schedule map[string][]float64) {
 
 	var sb strings.Builder
 	sb.Grow(128)
 
 	fmt.Println("Building report...")
+
 	_, _ = fmt.Fprintf(&sb, "%s\n", time.Now().Format("2006-01-02"))
 	_, _ = fmt.Fprintf(&sb, "%s\n", app.MainHeader.String())
+
 	for _, r := range data {
 		pn := r.PartNum
 		_, _ = fmt.Fprintf(&sb, "%s,%f,%f,%f,%f,%f,%f,%f,%f",
@@ -53,6 +52,8 @@ func Build(data []models.Data,
 		}
 		_, _ = fmt.Fprintf(&sb, "%s", "\n")
 	}
+
+	fmt.Println("Writing report to disk...")
 
 	f, err := os.Create(app.DataPath + app.Outfile)
 	helpers.CheckError("[report.Build.Open()] ", err)

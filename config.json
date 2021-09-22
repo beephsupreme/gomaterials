@@ -1,6 +1,6 @@
 {
     "DataPath":"/Users/michael/Dropbox/gomaterials/data/",
-    "Debug":true,
+    "Debug":false,
     "Backlog":"bl.csv",
     "Bits": 64,
     "Data":"data.csv",

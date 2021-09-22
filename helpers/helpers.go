@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"path/filepath"
 	"runtime"
 
 	"github.com/beephsupreme/gomaterials/internal/config"
@@ -15,8 +14,8 @@ var app *config.AppConfig
 
 // LoadFile reads a csv file and returns it as a [][]string
 func LoadFile(filename string) [][]string {
-	fmt.Println(app.DataPath + app.Data)
-	fmt.Println("Loading file:", filepath.Base(filename))
+
+	fmt.Println("Loading file:", filename)
 	f, err := os.Open(app.DataPath + filename)
 	CheckError("[helpers.LoadFile.Open()] ", err)
 	defer func(f *os.File) {
@@ -39,11 +38,7 @@ func CheckError(msg string, err error) {
 func PrintMemUsage() {
 	var m runtime.MemStats
 	runtime.ReadMemStats(&m)
-	// For info on each, see: https://golang.org/pkg/runtime/#MemStats
-	//fmt.Printf("Alloc = %v MiB", bToMb(m.Alloc))
 	fmt.Printf("Memory used: %v MiB\n", bToMb(m.TotalAlloc))
-	//fmt.Printf("\tSys = %v MiB", bToMb(m.Sys))
-	//fmt.Printf("\tNumGC = %v\n", m.NumGC)
 }
 
 func bToMb(b uint64) uint64 {

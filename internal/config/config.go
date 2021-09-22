@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// AppConfig is used to share data throughout the app
 type AppConfig struct {
 	DataPath        string `json:"DataPath"`
 	Debug           bool   `json:"Debug"`
@@ -36,10 +37,10 @@ type AppConfig struct {
 	UOM             int `json:"UOM"`
 }
 
+// LoadConfig reads configuration settings from config.json and stores
+// the values in the AppConfig struct.
 func LoadConfig(app *AppConfig) {
 
-	// then config file settings
-	//var a AppConfig
 	content, err := os.ReadFile("config.json")
 	if err != nil {
 		log.Fatal("[config.LoadConfig]: ", err)
