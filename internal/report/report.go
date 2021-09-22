@@ -26,7 +26,7 @@ func Build(data []models.Data, backlog, hfr map[string]float64, schedule map[str
 
 	for _, r := range data {
 		pn := r.PartNum
-		_, _ = fmt.Fprintf(&sb, "%s,%f,%f,%f,%f,%f,%f,%f,%f",
+		_, _ = fmt.Fprintf(&sb, "%s,%.0f,%.0f,%.0f,%.0f,%.0f,%.0f,%.0f,%.0f",
 			pn,
 			r.OnHand,
 			backlog[pn],
@@ -46,7 +46,7 @@ func Build(data []models.Data, backlog, hfr map[string]float64, schedule map[str
 				if v[i] < 1.0 {
 					_, _ = fmt.Fprintf(&sb, "%s", ",")
 				} else {
-					_, _ = fmt.Fprintf(&sb, ",%f", v[i])
+					_, _ = fmt.Fprintf(&sb, ",%.0f", v[i])
 				}
 			}
 		}
