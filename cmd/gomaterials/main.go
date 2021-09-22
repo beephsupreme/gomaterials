@@ -25,7 +25,7 @@ func main() {
 }
 
 func run() {
-	data := inventory.LoadData(helpers.LoadFile(app.Data))
+	data := inventory.LoadData()
 	backlog := sales.LoadData(helpers.LoadFile(app.Backlog))
 	hfr := sales.LoadData(helpers.LoadFile(app.Hfr))
 	validate := helpers.LoadFile(app.Validate)
