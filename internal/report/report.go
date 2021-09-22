@@ -16,15 +16,18 @@ var app *config.AppConfig
 // CreateReport creates a strings.Builder object which is written to a csv file
 func Build(data []models.Data,
 	backlog, hfr map[string]float64,
-	schedule map[string][]float64,
-	sb, hdr *strings.Builder) {
+	schedule map[string][]float64) {
 	//create materials table using strings.Builder
+
+	var sb strings.Builder
+	sb.Grow(128)
+
 	fmt.Println("Building report...")
-	_, _ = fmt.Fprintf(sb, "%s\n", time.Now().Format("2006-01-02"))
-	_, _ = fmt.Fprintf(sb, "%s", hdr.String())
+	_, _ = fmt.Fprintf(&sb, "%s\n", time.Now().Format("2006-01-02"))
+	_, _ = fmt.Fprintf(&sb, "%s\n", app.MainHeader.String())
 	for _, r := range data {
 		pn := r.PartNum
-		_, _ = fmt.Fprintf(sb, "%s,%f,%f,%f,%f,%f,%f,%f,%f",
+		_, _ = fmt.Fprintf(&sb, "%s,%f,%f,%f,%f,%f,%f,%f,%f",
 			pn,
 			r.OnHand,
 			backlog[pn],
@@ -37,18 +40,18 @@ func Build(data []models.Data,
 
 		if v, ok := schedule[pn]; !ok {
 			for i := 0; i < app.NumDates; i++ {
-				_, _ = fmt.Fprintf(sb, "%s", ",")
+				_, _ = fmt.Fprintf(&sb, "%s", ",")
 			}
 		} else {
 			for i := 0; i < app.NumDates; i++ {
 				if v[i] < 1.0 {
-					_, _ = fmt.Fprintf(sb, "%s", ",")
+					_, _ = fmt.Fprintf(&sb, "%s", ",")
 				} else {
-					_, _ = fmt.Fprintf(sb, ",%f", v[i])
+					_, _ = fmt.Fprintf(&sb, ",%f", v[i])
 				}
 			}
 		}
-		_, _ = fmt.Fprintf(sb, "%s", "\n")
+		_, _ = fmt.Fprintf(&sb, "%s", "\n")
 	}
 
 	f, err := os.Create(app.DataPath + app.Outfile)

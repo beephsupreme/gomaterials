@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 )
 
 type AppConfig struct {
@@ -18,6 +19,7 @@ type AppConfig struct {
 	Validate        string `json:"Validate"`
 	ScheduleURL     string `json:"ScheduleURL"`
 	Header          string `json:"Header"`
+	MainHeader      strings.Builder
 	FirstLineText   string `json:"FirstLineText"`
 	FirstLineNumber int
 	Factor          int `json:"Factor"`
@@ -48,6 +50,8 @@ func LoadConfig(app *AppConfig) {
 		log.Fatal("[config.LoadConfig]: ", err)
 	}
 
+	_, _ = fmt.Fprintf(&app.MainHeader, "%s", app.Header)
+
 	if app.Debug {
 		fmt.Println("DataPath: ", app.DataPath)
 		fmt.Println("Debug: ", app.Debug)
@@ -59,6 +63,7 @@ func LoadConfig(app *AppConfig) {
 		fmt.Println("Validate: ", app.Validate)
 		fmt.Println("ScheduleURL: ", app.ScheduleURL)
 		fmt.Println("Header: ", app.Header)
+		fmt.Println("MainHeader: ", app.MainHeader.String())
 		fmt.Println("FirstLineText: ", app.FirstLineText)
 		fmt.Println("Factor: ", app.Factor)
 		fmt.Println("Bits: ", app.Bits)

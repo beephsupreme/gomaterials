@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"time"
 
 	"github.com/beephsupreme/gomaterials/helpers"
@@ -26,20 +25,16 @@ func main() {
 }
 
 func run() {
-	var header, dates, out strings.Builder
-	out.Grow(128)
-	_, _ = fmt.Fprintf(&header, "%s", app.Header)
 	data := inventory.LoadData(helpers.LoadFile(app.Data))
 	backlog := sales.LoadData(helpers.LoadFile(app.Backlog))
 	hfr := sales.LoadData(helpers.LoadFile(app.Hfr))
 	validate := helpers.LoadFile(app.Validate)
 	translate := helpers.LoadFile(app.Translate)
-	scheduleTable, dates := shipping.MakeTable(shipping.Retrieve(app.ScheduleURL))
-	_, _ = fmt.Fprintf(&header, "%s\n", dates.String())
+	scheduleTable := shipping.MakeTable(shipping.Retrieve(app.ScheduleURL))
 	scheduleTable = shipping.Validate(scheduleTable, validate)
 	scheduleTable = shipping.Translate(scheduleTable, translate)
 	schedule := shipping.MakeMap(scheduleTable)
-	report.Build(data, backlog, hfr, schedule, &out, &header)
+	report.Build(data, backlog, hfr, schedule)
 }
 
 func setup() {

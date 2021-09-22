@@ -9,12 +9,11 @@ import (
 )
 
 // MakeTable converts []string into [][]string
-func MakeTable(S []string) ([][]string, strings.Builder) {
+func MakeTable(S []string) [][]string {
 	var data [][]string
 	var row []string
 	var td string
 	var firstLine, firstDate int
-	var header strings.Builder
 	fmt.Println("Processing...")
 	// Find start of regular data
 	for firstLine, td = range S {
@@ -32,11 +31,11 @@ func MakeTable(S []string) ([][]string, strings.Builder) {
 	// set number of ship dates
 	app.NumDates = firstLine - firstDate
 	// Copy shipping dates to correct location
-	// Also copy to global var 'header' [bad but convienient]
 	for i := 0; i < app.NumDates; i++ {
 		S[firstLine+app.ScheduleWidth+i] = S[firstLine-app.NumDates+i]
-		_, _ = fmt.Fprintf(&header, ",%s", S[firstLine-app.NumDates+i])
+		_, _ = fmt.Fprintf(&app.MainHeader, ",%s", S[firstLine-app.NumDates+i])
 	}
+
 	// Remove uneeded first lines
 	S = S[firstLine:]
 	// Convert shipping from data []string to table [][]string
@@ -56,7 +55,7 @@ func MakeTable(S []string) ([][]string, strings.Builder) {
 		data = append(data, row)
 		row = []string{}
 	}
-	return data, header
+	return data
 }
 
 // MakeMap takes the [][]string from ScheduleToTable and returns it as a map
