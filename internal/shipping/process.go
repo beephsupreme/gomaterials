@@ -14,12 +14,12 @@ func MakeTable(S []string) ([][]string, int, strings.Builder) {
 	var data [][]string
 	var row []string
 	var td string
-	var firstLine, firstDate, numDates int
+	var firstLine, firstDate int
 	var header strings.Builder
 	fmt.Println("Processing...")
 	// Find start of regular data
 	for firstLine, td = range S {
-		if td == config.FIRSTLINE_TEXT {
+		if td == app.FirstLineText {
 			break
 		}
 	}
@@ -31,18 +31,18 @@ func MakeTable(S []string) ([][]string, int, strings.Builder) {
 		}
 	}
 	// set number of ship dates
-	numDates = firstLine - firstDate
+	app.NumDates = firstLine - firstDate
 	// Copy shipping dates to correct location
 	// Also copy to global var 'header' [bad but convienient]
-	for i := 0; i < numDates; i++ {
-		S[firstLine+config.WIDTH+i] = S[firstLine-numDates+i]
-		_, _ = fmt.Fprintf(&header, ",%s", S[firstLine-numDates+i])
+	for i := 0; i < app.NumDates; i++ {
+		S[firstLine+app.ScheduleWidth+i] = S[firstLine-app.NumDates+i]
+		_, _ = fmt.Fprintf(&header, ",%s", S[firstLine-app.NumDates+i])
 	}
 	// Remove uneeded first lines
 	S = S[firstLine:]
 	// Convert shipping from data []string to table [][]string
-	for i := 0; i < len(S)-(numDates+config.WIDTH); i += numDates + config.WIDTH { // ******** CHECK THIS ******
-		for j := 0; j < numDates+config.WIDTH; j++ {
+	for i := 0; i < len(S)-(app.NumDates+app.ScheduleWidth); i += app.NumDates + app.ScheduleWidth { // ******** CHECK THIS ******
+		for j := 0; j < app.NumDates+config.WIDTH; j++ {
 			// Ignore 2nd through 5th columns
 			if j == 1 || j == 2 || j == 3 || j == 4 {
 				continue
@@ -57,7 +57,7 @@ func MakeTable(S []string) ([][]string, int, strings.Builder) {
 		data = append(data, row)
 		row = []string{}
 	}
-	return data, numDates, header
+	return data, app.NumDates, header
 }
 
 // MakeMap takes the [][]string from ScheduleToTable and returns it as a map
@@ -67,7 +67,7 @@ func MakeMap(T [][]string) map[string][]float64 {
 	for _, t := range T[1:] {
 		if v, ok := m[t[0]]; ok {
 			for j := 1; j < tWidth; j++ {
-				f, err := strconv.ParseFloat(t[j], config.BITS)
+				f, err := strconv.ParseFloat(t[j], app.Bits)
 				helpers.CheckError("[shipping.MakeMap.ParseFloat(if)] ", err)
 				v[j-1] += f
 			}
@@ -75,7 +75,7 @@ func MakeMap(T [][]string) map[string][]float64 {
 		} else {
 			d := make([]float64, tWidth-1)
 			for j := 1; j < tWidth; j++ {
-				f, err := strconv.ParseFloat(t[j], config.BITS)
+				f, err := strconv.ParseFloat(t[j], app.Bits)
 				helpers.CheckError("[shipping.MakeMap.ParseFloat(else)] ", err)
 				d[j-1] = f
 			}

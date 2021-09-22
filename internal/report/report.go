@@ -11,6 +11,8 @@ import (
 	"github.com/beephsupreme/gomaterials/internal/models"
 )
 
+var app *config.AppConfig
+
 // CreateReport creates a strings.Builder object which is written to a csv file
 func Build(data []models.Data,
 	backlog, hfr map[string]float64,
@@ -50,7 +52,7 @@ func Build(data []models.Data,
 		_, _ = fmt.Fprintf(sb, "%s", "\n")
 	}
 
-	f, err := os.Create(config.OUTFILE)
+	f, err := os.Create(app.DataPath + app.Outfile)
 	helpers.CheckError("[report.Build.Open()] ", err)
 	defer func(f *os.File) {
 		err := f.Close()
@@ -61,4 +63,8 @@ func Build(data []models.Data,
 	b, err := f.WriteString(sb.String())
 	helpers.CheckError("[report.Build.WriteString(sb)] ", err)
 	fmt.Println("Wrote", b, "bytes to disk.")
+}
+
+func LoadConfig(a *config.AppConfig) {
+	app = a
 }

@@ -49,4 +49,5 @@ func setup() {
 	inventory.LoadConfig(&app)
 	sales.LoadConfig(&app)
 	shipping.LoadConfig(&app)
+	report.LoadConfig(&app)
 }

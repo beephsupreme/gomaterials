@@ -38,14 +38,14 @@ func LoadConfig(app *AppConfig) {
 
 	// then config file settings
 	//var a AppConfig
-	content, err := os.ReadFile("/Users/michael/Dropbox/gomaterials/assets/data/config.json")
+	content, err := os.ReadFile("config.json")
 	if err != nil {
-		log.Fatal("opening config file", err)
+		log.Fatal("[config.LoadConfig]: ", err)
 	}
 
 	err = json.Unmarshal(content, app)
 	if err != nil {
-		log.Fatal("unmarshalling config file", err)
+		log.Fatal("[config.LoadConfig]: ", err)
 	}
 
 	if app.Debug {
