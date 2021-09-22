@@ -9,7 +9,7 @@ import (
 
 // Retrieve scrapes the Toki Corp. shipping schedule.
 // It grabs all 'td' elements an stores themas a []string
-func Retrieve(urlToTable string) []string {
+func Retrieve() []string {
 	var td []string
 	fmt.Println("Retrieving", app.ScheduleURL)
 	c := colly.NewCollector()
@@ -19,7 +19,7 @@ func Retrieve(urlToTable string) []string {
 	c.OnHTML("td", func(e *colly.HTMLElement) {
 		td = append(td, e.Text)
 	})
-	err := c.Visit(urlToTable)
+	err := c.Visit(app.ScheduleURL)
 	helpers.CheckError("[shipping.Retrieve.colly.Visit()] ", err)
 	return td
 }

@@ -9,11 +9,13 @@ import (
 )
 
 // MakeTable converts []string into [][]string
-func MakeTable(S []string) [][]string {
+func MakeTable() [][]string {
 	var data [][]string
 	var row []string
 	var td string
 	var firstLine, firstDate int
+
+	S := Retrieve()
 
 	// Find start of regular data
 	for firstLine, td = range S {
@@ -55,11 +57,15 @@ func MakeTable(S []string) [][]string {
 		data = append(data, row)
 		row = []string{}
 	}
+	data = Validate(data)
+	data = Translate(data)
 	return data
 }
 
 // MakeMap takes the [][]string from ScheduleToTable and returns it as a map
-func MakeMap(T [][]string) map[string][]float64 {
+func LoadData() map[string][]float64 {
+
+	T := MakeTable()
 	tWidth := len(T[0][0:])
 	m := make(map[string][]float64)
 	for _, t := range T[1:] {
