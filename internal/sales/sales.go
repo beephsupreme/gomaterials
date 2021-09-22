@@ -11,7 +11,10 @@ import (
 var app *config.AppConfig
 
 // LoadData takes [][]string and returns a map[string]float64
-func LoadData(S [][]string) map[string]float64 {
+func LoadData(filename string) map[string]float64 {
+
+	S := helpers.LoadFile(filename)
+
 	m := make(map[string]float64)
 
 	fmt.Println("Processing...")

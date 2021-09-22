@@ -26,8 +26,8 @@ func main() {
 
 func run() {
 	data := inventory.LoadData()
-	backlog := sales.LoadData(helpers.LoadFile(app.Backlog))
-	hfr := sales.LoadData(helpers.LoadFile(app.Hfr))
+	backlog := sales.LoadData(app.Backlog)
+	hfr := sales.LoadData(app.Hfr)
 	validate := helpers.LoadFile(app.Validate)
 	translate := helpers.LoadFile(app.Translate)
 	scheduleTable := shipping.MakeTable(shipping.Retrieve(app.ScheduleURL))
