@@ -6,9 +6,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/beephsupreme/gomaterials/helpers"
 	"github.com/beephsupreme/gomaterials/internal/config"
 	"github.com/beephsupreme/gomaterials/internal/models"
-	"github.com/beephsupreme/gomaterials/pkg/utility"
 )
 
 // CreateReport creates a strings.Builder object which is written to a csv file
@@ -51,14 +51,14 @@ func Build(data []models.Data,
 	}
 
 	f, err := os.Create(config.OUTFILE)
-	utility.CheckError("[report.Build.Open()] ", err)
+	helpers.CheckError("[report.Build.Open()] ", err)
 	defer func(f *os.File) {
 		err := f.Close()
 		if err != nil {
-			utility.CheckError("[report.Build.Close()] ", err)
+			helpers.CheckError("[report.Build.Close()] ", err)
 		}
 	}(f)
 	b, err := f.WriteString(sb.String())
-	utility.CheckError("[report.Build.WriteString(sb)] ", err)
+	helpers.CheckError("[report.Build.WriteString(sb)] ", err)
 	fmt.Println("Wrote", b, "bytes to disk.")
 }

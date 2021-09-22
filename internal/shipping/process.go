@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/beephsupreme/gomaterials/helpers"
 	"github.com/beephsupreme/gomaterials/internal/config"
-	"github.com/beephsupreme/gomaterials/pkg/utility"
 )
 
 // MakeTable converts []string into [][]string
@@ -68,7 +68,7 @@ func MakeMap(T [][]string) map[string][]float64 {
 		if v, ok := m[t[0]]; ok {
 			for j := 1; j < tWidth; j++ {
 				f, err := strconv.ParseFloat(t[j], config.BITS)
-				utility.CheckError("[shipping.MakeMap.ParseFloat(if)] ", err)
+				helpers.CheckError("[shipping.MakeMap.ParseFloat(if)] ", err)
 				v[j-1] += f
 			}
 			m[t[0]] = v
@@ -76,7 +76,7 @@ func MakeMap(T [][]string) map[string][]float64 {
 			d := make([]float64, tWidth-1)
 			for j := 1; j < tWidth; j++ {
 				f, err := strconv.ParseFloat(t[j], config.BITS)
-				utility.CheckError("[shipping.MakeMap.ParseFloat(else)] ", err)
+				helpers.CheckError("[shipping.MakeMap.ParseFloat(else)] ", err)
 				d[j-1] = f
 			}
 			m[t[0]] = d

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/beephsupreme/gomaterials/helpers"
 	"github.com/beephsupreme/gomaterials/internal/config"
-	"github.com/beephsupreme/gomaterials/pkg/utility"
 )
 
 // Translate converts Toki units into TLI units
@@ -21,7 +21,7 @@ func Translate(S, T [][]string, width int) [][]string {
 			// Convert values if conversion factor found for this row
 			for i := 1; i < width; i++ {
 				f, err := strconv.ParseFloat(row[i], 64)
-				utility.CheckError("[shipping.Translation.ParseFloat(factor)] ", err)
+				helpers.CheckError("[shipping.Translation.ParseFloat(factor)] ", err)
 				row[i] = fmt.Sprintf("%f", factor*f)
 			}
 		}
@@ -36,7 +36,7 @@ func MakeTranslationMap(S [][]string) map[string]float64 {
 	for i := 1; i < len(S); i++ {
 		pn := S[i][config.PN]
 		factor, err := strconv.ParseFloat(S[i][config.FACTOR], config.BITS)
-		utility.CheckError("[shipping.MakeTranslationMap.ParseFloat(factor)] ", err)
+		helpers.CheckError("[shipping.MakeTranslationMap.ParseFloat(factor)] ", err)
 		m[pn] = factor
 	}
 	return m

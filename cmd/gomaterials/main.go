@@ -5,24 +5,24 @@ import (
 	"strings"
 	"time"
 
+	"github.com/beephsupreme/gomaterials/helpers"
 	"github.com/beephsupreme/gomaterials/internal/config"
 	"github.com/beephsupreme/gomaterials/internal/inventory"
 	"github.com/beephsupreme/gomaterials/internal/report"
 	"github.com/beephsupreme/gomaterials/internal/sales"
 	"github.com/beephsupreme/gomaterials/internal/shipping"
-	"github.com/beephsupreme/gomaterials/pkg/utility"
 )
 
 var app config.AppConfig
 
 func main() {
 	start := time.Now()
-	fmt.Println("Materials 4.1 \u00A9 2021 Michael N. Rowsey")
+	fmt.Println("Materials 4.2 \u00A9 2021 Michael N. Rowsey")
 	setup()
 	run()
 	et := time.Since(start)
 	fmt.Printf("Task complete! (%.3g seconds)\n", et.Seconds())
-	utility.PrintMemUsage()
+	helpers.PrintMemUsage()
 }
 
 func run() {
@@ -30,11 +30,11 @@ func run() {
 	var count int
 	out.Grow(128)
 	_, _ = fmt.Fprintf(&header, "%s", app.Header)
-	data := inventory.LoadData(utility.LoadFile(app.Data))
-	backlog := sales.LoadData(utility.LoadFile(app.Backlog))
-	hfr := sales.LoadData(utility.LoadFile(app.Hfr))
-	validate := utility.LoadFile(app.Validate)
-	translate := utility.LoadFile(app.Translate)
+	data := inventory.LoadData(helpers.LoadFile(app.Data))
+	backlog := sales.LoadData(helpers.LoadFile(app.Backlog))
+	hfr := sales.LoadData(helpers.LoadFile(app.Hfr))
+	validate := helpers.LoadFile(app.Validate)
+	translate := helpers.LoadFile(app.Translate)
 	scheduleTable, count, dates := shipping.MakeTable(shipping.Retrieve(app.ScheduleURL))
 	_, _ = fmt.Fprintf(&header, "%s\n", dates.String())
 	scheduleTable = shipping.Validate(scheduleTable, validate)
@@ -45,7 +45,7 @@ func run() {
 
 func setup() {
 	config.LoadConfig(&app)
-	utility.LoadConfig(&app)
+	helpers.LoadConfig(&app)
 	inventory.LoadConfig(&app)
 	sales.LoadConfig(&app)
 	shipping.LoadConfig(&app)

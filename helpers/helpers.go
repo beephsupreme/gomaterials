@@ -1,4 +1,4 @@
-package utility
+package helpers
 
 import (
 	"encoding/csv"
@@ -18,14 +18,14 @@ func LoadFile(filename string) [][]string {
 	fmt.Println(app.DataPath + app.Data)
 	fmt.Println("Loading file:", filepath.Base(filename))
 	f, err := os.Open(app.DataPath + filename)
-	CheckError("[utility.LoadFile.Open()] ", err)
+	CheckError("[helpers.LoadFile.Open()] ", err)
 	defer func(f *os.File) {
 		err := f.Close()
-		CheckError("[utility.LoadFile.Close()] ", err)
+		CheckError("[helpers.LoadFile.Close()] ", err)
 	}(f)
 	r := csv.NewReader(f)
 	t, err := r.ReadAll()
-	CheckError("[utility.LoadFile.ReadAll()] ", err)
+	CheckError("[helpers.LoadFile.ReadAll()] ", err)
 	return t
 }
 

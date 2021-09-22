@@ -3,7 +3,7 @@ package shipping
 import (
 	"fmt"
 
-	"github.com/beephsupreme/gomaterials/pkg/utility"
+	"github.com/beephsupreme/gomaterials/helpers"
 	"github.com/gocolly/colly"
 )
 
@@ -20,6 +20,6 @@ func Retrieve(urlToTable string) []string {
 		td = append(td, e.Text)
 	})
 	err := c.Visit(urlToTable)
-	utility.CheckError("[shipping.Retrieve.colly.Visit()] ", err)
+	helpers.CheckError("[shipping.Retrieve.colly.Visit()] ", err)
 	return td
 }

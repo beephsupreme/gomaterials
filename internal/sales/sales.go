@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/beephsupreme/gomaterials/helpers"
 	"github.com/beephsupreme/gomaterials/internal/config"
-	"github.com/beephsupreme/gomaterials/pkg/utility"
 )
 
 var app *config.AppConfig
@@ -18,9 +18,9 @@ func LoadData(S [][]string) map[string]float64 {
 	for i := 1; i < len(S); i++ {
 		pn := S[i][config.PN]
 		qty, err := strconv.ParseFloat(S[i][config.QTY], config.BITS)
-		utility.CheckError("[sales.LoadData.ParseFloat(qty)] ", err)
+		helpers.CheckError("[sales.LoadData.ParseFloat(qty)] ", err)
 		uom, err := strconv.ParseFloat(S[i][config.UOM], config.BITS)
-		utility.CheckError("[sales.LoadData.ParseFloat(uom)] ", err)
+		helpers.CheckError("[sales.LoadData.ParseFloat(uom)] ", err)
 		if val, ok := m[pn]; !ok {
 			m[pn] = qty * uom
 		} else {

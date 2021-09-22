@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/beephsupreme/gomaterials/helpers"
 	"github.com/beephsupreme/gomaterials/internal/config"
 	"github.com/beephsupreme/gomaterials/internal/models"
-	"github.com/beephsupreme/gomaterials/pkg/utility"
 )
 
 var app *config.AppConfig
@@ -22,11 +22,11 @@ func LoadData(D [][]string) []models.Data {
 	for i := 1; i < len(D); i++ {
 		d.PartNum = D[i][app.PN]
 		d.OnHand, err = strconv.ParseFloat(D[i][config.OH], app.Bits)
-		utility.CheckError("[inventory.LoadData.ParseFloat(OnHand)] ", err)
+		helpers.CheckError("[inventory.LoadData.ParseFloat(OnHand)] ", err)
 		d.OnOrder, err = strconv.ParseFloat(D[i][config.OO], app.Bits)
-		utility.CheckError("[inventory.LoadData.ParseFloat(OnOrder)] ", err)
+		helpers.CheckError("[inventory.LoadData.ParseFloat(OnOrder)] ", err)
 		d.ReOrder, err = strconv.ParseFloat(D[i][config.RO], app.Bits)
-		utility.CheckError("[inventory.LoadData.ParseFloat(ReOrder)] ", err)
+		helpers.CheckError("[inventory.LoadData.ParseFloat(ReOrder)] ", err)
 		data = append(data, d)
 	}
 	return data

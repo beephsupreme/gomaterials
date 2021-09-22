@@ -1,8 +1,8 @@
 **/.DS_Store
 **/.idea
 **/.vscode
-**/assets/data/data.csv
-**/assets/data/bl.csv
-**/assets/data/hfr.csv
-**/assets/data/materials.csv
-**/assets/data/*.xlsx
+**/data/data.csv
+**/data/bl.csv
+**/data/hfr.csv
+**/data/materials.csv
+**/data/*.xlsx
