@@ -11,12 +11,16 @@ import (
 
 var app *config.AppConfig
 
-// LoadData takes [][]string created from accounting
-// system export (data.csv) and loads into a 'Data' struct
-func LoadData(D [][]string) []models.Data {
+// LoadData reads file from AV export and loads each line
+// into an array of structures
+func LoadData() []models.Data {
+
+	var D [][]string
 	var d models.Data
 	var data []models.Data
 	var err error
+
+	D = helpers.LoadFile(app.Data)
 
 	fmt.Println("Processing...")
 	for i := 1; i < len(D); i++ {
@@ -32,6 +36,7 @@ func LoadData(D [][]string) []models.Data {
 	return data
 }
 
+// LoadConfig makes AppConfig available to this package
 func LoadConfig(a *config.AppConfig) {
 	app = a
 }
