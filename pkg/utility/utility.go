@@ -7,12 +7,17 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+
+	"github.com/beephsupreme/gomaterials/internal/config"
 )
+
+var app *config.AppConfig
 
 // LoadFile reads a csv file and returns it as a [][]string
 func LoadFile(filename string) [][]string {
+	fmt.Println(app.DataPath + app.Data)
 	fmt.Println("Loading file:", filepath.Base(filename))
-	f, err := os.Open(filename)
+	f, err := os.Open(app.DataPath + filename)
 	CheckError("[utility.LoadFile.Open()] ", err)
 	defer func(f *os.File) {
 		err := f.Close()
@@ -43,4 +48,8 @@ func PrintMemUsage() {
 
 func bToMb(b uint64) uint64 {
 	return b / 1024 / 1024
+}
+
+func LoadConfig(a *config.AppConfig) {
+	app = a
 }
