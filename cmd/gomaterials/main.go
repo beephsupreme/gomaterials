@@ -28,11 +28,9 @@ func run() {
 	data := inventory.LoadData()
 	backlog := sales.LoadData(app.Backlog)
 	hfr := sales.LoadData(app.Hfr)
-	validate := helpers.LoadFile(app.Validate)
-	translate := helpers.LoadFile(app.Translate)
 	scheduleTable := shipping.MakeTable(shipping.Retrieve(app.ScheduleURL))
-	scheduleTable = shipping.Validate(scheduleTable, validate)
-	scheduleTable = shipping.Translate(scheduleTable, translate)
+	scheduleTable = shipping.Validate(scheduleTable)
+	scheduleTable = shipping.Translate(scheduleTable)
 	schedule := shipping.MakeMap(scheduleTable)
 	report.Build(data, backlog, hfr, schedule)
 }

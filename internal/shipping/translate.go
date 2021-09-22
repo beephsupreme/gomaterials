@@ -8,8 +8,12 @@ import (
 )
 
 // Translate converts Toki units into TLI units
-func Translate(S, T [][]string) [][]string {
+func Translate(S [][]string) [][]string {
+
 	fmt.Println("Translating...")
+
+	T := helpers.LoadFile(app.Translate)
+
 	m := MakeTranslationMap(T)
 
 	for _, row := range S {

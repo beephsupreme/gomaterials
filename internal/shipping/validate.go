@@ -4,11 +4,17 @@ import (
 	"fmt"
 	"log"
 	"strings"
+
+	"github.com/beephsupreme/gomaterials/helpers"
 )
 
 // Validate checks for invalid part numbers corrects them
-func Validate(S, V [][]string) [][]string {
+func Validate(S [][]string) [][]string {
+
 	fmt.Println("Validating...")
+
+	V := helpers.LoadFile(app.Validate)
+
 	m, s := MakeValidationStructures(V)
 	for _, pn := range S[1:] {
 		found := false
