@@ -6,11 +6,10 @@ import (
 	"strings"
 
 	"github.com/beephsupreme/gomaterials/helpers"
-	"github.com/beephsupreme/gomaterials/internal/config"
 )
 
 // MakeTable converts []string into [][]string
-func MakeTable(S []string) ([][]string, int, strings.Builder) {
+func MakeTable(S []string) ([][]string, strings.Builder) {
 	var data [][]string
 	var row []string
 	var td string
@@ -41,8 +40,8 @@ func MakeTable(S []string) ([][]string, int, strings.Builder) {
 	// Remove uneeded first lines
 	S = S[firstLine:]
 	// Convert shipping from data []string to table [][]string
-	for i := 0; i < len(S)-(app.NumDates+app.ScheduleWidth); i += app.NumDates + app.ScheduleWidth { // ******** CHECK THIS ******
-		for j := 0; j < app.NumDates+config.WIDTH; j++ {
+	for i := 0; i < len(S)-(app.NumDates+app.ScheduleWidth); i += app.NumDates + app.ScheduleWidth {
+		for j := 0; j < app.NumDates+app.ScheduleWidth; j++ {
 			// Ignore 2nd through 5th columns
 			if j == 1 || j == 2 || j == 3 || j == 4 {
 				continue
@@ -57,7 +56,7 @@ func MakeTable(S []string) ([][]string, int, strings.Builder) {
 		data = append(data, row)
 		row = []string{}
 	}
-	return data, app.NumDates, header
+	return data, header
 }
 
 // MakeMap takes the [][]string from ScheduleToTable and returns it as a map

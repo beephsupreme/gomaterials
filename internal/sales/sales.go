@@ -16,10 +16,10 @@ func LoadData(S [][]string) map[string]float64 {
 
 	fmt.Println("Processing...")
 	for i := 1; i < len(S); i++ {
-		pn := S[i][config.PN]
-		qty, err := strconv.ParseFloat(S[i][config.QTY], config.BITS)
+		pn := S[i][app.PN]
+		qty, err := strconv.ParseFloat(S[i][app.QTY], app.Bits)
 		helpers.CheckError("[sales.LoadData.ParseFloat(qty)] ", err)
-		uom, err := strconv.ParseFloat(S[i][config.UOM], config.BITS)
+		uom, err := strconv.ParseFloat(S[i][app.UOM], app.Bits)
 		helpers.CheckError("[sales.LoadData.ParseFloat(uom)] ", err)
 		if val, ok := m[pn]; !ok {
 			m[pn] = qty * uom

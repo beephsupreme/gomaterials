@@ -27,7 +27,6 @@ func main() {
 
 func run() {
 	var header, dates, out strings.Builder
-	var count int
 	out.Grow(128)
 	_, _ = fmt.Fprintf(&header, "%s", app.Header)
 	data := inventory.LoadData(helpers.LoadFile(app.Data))
@@ -35,12 +34,12 @@ func run() {
 	hfr := sales.LoadData(helpers.LoadFile(app.Hfr))
 	validate := helpers.LoadFile(app.Validate)
 	translate := helpers.LoadFile(app.Translate)
-	scheduleTable, count, dates := shipping.MakeTable(shipping.Retrieve(app.ScheduleURL))
+	scheduleTable, dates := shipping.MakeTable(shipping.Retrieve(app.ScheduleURL))
 	_, _ = fmt.Fprintf(&header, "%s\n", dates.String())
 	scheduleTable = shipping.Validate(scheduleTable, validate)
-	scheduleTable = shipping.Translate(scheduleTable, translate, count)
+	scheduleTable = shipping.Translate(scheduleTable, translate, app.NumDates)
 	schedule := shipping.MakeMap(scheduleTable)
-	report.Build(data, backlog, hfr, schedule, count, &out, &header)
+	report.Build(data, backlog, hfr, schedule, &out, &header)
 }
 
 func setup() {

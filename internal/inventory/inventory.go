@@ -21,11 +21,11 @@ func LoadData(D [][]string) []models.Data {
 	fmt.Println("Processing...")
 	for i := 1; i < len(D); i++ {
 		d.PartNum = D[i][app.PN]
-		d.OnHand, err = strconv.ParseFloat(D[i][config.OH], app.Bits)
+		d.OnHand, err = strconv.ParseFloat(D[i][app.OH], app.Bits)
 		helpers.CheckError("[inventory.LoadData.ParseFloat(OnHand)] ", err)
-		d.OnOrder, err = strconv.ParseFloat(D[i][config.OO], app.Bits)
+		d.OnOrder, err = strconv.ParseFloat(D[i][app.OO], app.Bits)
 		helpers.CheckError("[inventory.LoadData.ParseFloat(OnOrder)] ", err)
-		d.ReOrder, err = strconv.ParseFloat(D[i][config.RO], app.Bits)
+		d.ReOrder, err = strconv.ParseFloat(D[i][app.RO], app.Bits)
 		helpers.CheckError("[inventory.LoadData.ParseFloat(ReOrder)] ", err)
 		data = append(data, d)
 	}

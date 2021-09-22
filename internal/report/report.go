@@ -17,7 +17,6 @@ var app *config.AppConfig
 func Build(data []models.Data,
 	backlog, hfr map[string]float64,
 	schedule map[string][]float64,
-	count int,
 	sb, hdr *strings.Builder) {
 	//create materials table using strings.Builder
 	fmt.Println("Building report...")
@@ -37,11 +36,11 @@ func Build(data []models.Data,
 			r.ReOrder)
 
 		if v, ok := schedule[pn]; !ok {
-			for i := 0; i < count; i++ {
+			for i := 0; i < app.NumDates; i++ {
 				_, _ = fmt.Fprintf(sb, "%s", ",")
 			}
 		} else {
-			for i := 0; i < count; i++ {
+			for i := 0; i < app.NumDates; i++ {
 				if v[i] < 1.0 {
 					_, _ = fmt.Fprintf(sb, "%s", ",")
 				} else {
