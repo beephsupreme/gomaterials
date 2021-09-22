@@ -8,7 +8,7 @@ import (
 )
 
 // Translate converts Toki units into TLI units
-func Translate(S, T [][]string, width int) [][]string {
+func Translate(S, T [][]string) [][]string {
 	fmt.Println("Translating...")
 	m := MakeTranslationMap(T)
 
@@ -18,7 +18,7 @@ func Translate(S, T [][]string, width int) [][]string {
 			continue
 		} else {
 			// Convert values if conversion factor found for this row
-			for i := 1; i < width; i++ {
+			for i := 1; i < app.NumDates; i++ {
 				f, err := strconv.ParseFloat(row[i], 64)
 				helpers.CheckError("[shipping.Translation.ParseFloat(factor)] ", err)
 				row[i] = fmt.Sprintf("%f", factor*f)

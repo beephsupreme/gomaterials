@@ -37,7 +37,7 @@ func run() {
 	scheduleTable, dates := shipping.MakeTable(shipping.Retrieve(app.ScheduleURL))
 	_, _ = fmt.Fprintf(&header, "%s\n", dates.String())
 	scheduleTable = shipping.Validate(scheduleTable, validate)
-	scheduleTable = shipping.Translate(scheduleTable, translate, app.NumDates)
+	scheduleTable = shipping.Translate(scheduleTable, translate)
 	schedule := shipping.MakeMap(scheduleTable)
 	report.Build(data, backlog, hfr, schedule, &out, &header)
 }
