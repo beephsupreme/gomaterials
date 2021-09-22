@@ -25,10 +25,6 @@ func main() {
 }
 
 func run() {
-<<<<<<< HEAD
-=======
-	//data := inventory.LoadData(helpers.LoadFile(app.Data))
->>>>>>> dev
 	data := inventory.LoadData()
 	backlog := sales.LoadData(helpers.LoadFile(app.Backlog))
 	hfr := sales.LoadData(helpers.LoadFile(app.Hfr))
