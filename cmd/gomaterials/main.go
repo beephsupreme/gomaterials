@@ -23,6 +23,7 @@ func main() {
 	helpers.PrintMemUsage()
 }
 
+// run executes each step of building the materials report
 func run() {
 	fmt.Println(app.AppVersion)
 	data := inventory.LoadData()
@@ -32,6 +33,8 @@ func run() {
 	report.Build(data, backlog, hfr, schedule)
 }
 
+// setup loads config.AppConfig and passes a reference to each package
+// to facilitate data sharing throughout the app
 func setup() {
 	config.LoadConfig(&app)
 	helpers.LoadConfig(&app)
