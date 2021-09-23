@@ -17,16 +17,14 @@ var app config.AppConfig
 func main() {
 	start := time.Now()
 	setup()
-	fmt.Println(app.AppVersion)
 	run()
 	et := time.Since(start)
-	if app.Debug {
-		fmt.Printf("ET: %.3g seconds\n", et.Seconds())
-		helpers.PrintMemUsage()
-	}
+	fmt.Printf("ET: %.3g seconds\n", et.Seconds())
+	helpers.PrintMemUsage()
 }
 
 func run() {
+	fmt.Println(app.AppVersion)
 	data := inventory.LoadData()
 	backlog := sales.LoadData(app.Backlog)
 	hfr := sales.LoadData(app.Hfr)
