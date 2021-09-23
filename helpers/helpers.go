@@ -12,7 +12,7 @@ import (
 
 var app *config.AppConfig
 
-// LoadFile reads a csv file and returns it as a [][]string
+// LoadFile reads a csv file into a [][]string
 func LoadFile(filename string) [][]string {
 
 	fmt.Println("Loading ", filename)
@@ -35,16 +35,19 @@ func CheckError(msg string, err error) {
 	}
 }
 
+// PrintMemUsage prints total memory allocated to stdout
 func PrintMemUsage() {
 	var m runtime.MemStats
 	runtime.ReadMemStats(&m)
 	fmt.Printf("Memory used: %v MiB\n", bToMb(m.TotalAlloc))
 }
 
+// bToMb converts bit into MiB
 func bToMb(b uint64) uint64 {
 	return b / 1024 / 1024
 }
 
+// LoadConfig makes AppConfig available to this package
 func LoadConfig(a *config.AppConfig) {
 	app = a
 }
