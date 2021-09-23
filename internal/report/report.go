@@ -13,7 +13,8 @@ import (
 
 var app *config.AppConfig
 
-// CreateReport creates a strings.Builder object which is written to a csv file
+// CreateReport creates a strings.Builder object containg each line of the materials report.
+// The report is then written to a csv file.
 func Build(data []models.Data, backlog, hfr map[string]float64, schedule map[string][]float64) {
 
 	var sb strings.Builder
@@ -66,6 +67,7 @@ func Build(data []models.Data, backlog, hfr map[string]float64, schedule map[str
 	fmt.Println("Wrote", b, "bytes to disk.")
 }
 
+// LoadConfig makes AppConfig available to this package
 func LoadConfig(a *config.AppConfig) {
 	app = a
 }
