@@ -1,0 +1,26 @@
+{
+    "AppVersion":"Materials 4.2 \u00A9 2021 Michael N. Rowsey",
+    "DataPath":"/Users/michael/Dropbox/gomaterials/data/",
+    "Debug":false,
+    "Backlog":"bl.txt",
+    "Bits": 64,
+    "Data":"data.txt",
+    "Factor":1,
+    "FirstLineText":"TOKISTAR CODE",
+    "Header":"Part Number,On Hand,Backlog,Released,HFR,On Order,T-Avail,R-Avail,Reorder",
+    "HFR":"hfr.txt",
+    "OH":1,
+    "OO":2,
+    "Outfile":"materials.csv",
+    "PN":0,
+    "QTY":1,
+    "RO":3,
+    "TLI":1,
+    "TOKI":0,
+    "Translate":"translate.csv",
+    "UOM":2,
+    "ScheduleURL":"https://www.toki.co.jp/purchasing/TLIHTML.files/sheet001.htm",
+    "Validate":"validate.csv",
+    "ScheduleWidth":5
+}
+
