@@ -42,9 +42,13 @@ type AppConfig struct {
 // the values in the AppConfig struct.
 func LoadConfig(app *AppConfig) {
 
-	content, err := os.ReadFile("config.json")
+	content, err := os.ReadFile("config-local.json")
 	if err != nil {
-		log.Fatal("[config.LoadConfig]: ", err)
+		fmt.Println("config-local.json not found - loading default config")
+		content, err = os.ReadFile("config-local.json")
+		if err != nil {
+			log.Fatal("[config.LoadConfig]: ", err)
+		}
 	}
 
 	err = json.Unmarshal(content, app)
