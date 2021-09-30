@@ -2,6 +2,7 @@ package shipping
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/beephsupreme/gomaterials/helpers"
 	"github.com/gocolly/colly"
@@ -11,6 +12,7 @@ import (
 // It grabs all 'td' elements an stores themas a []string
 func Retrieve() []string {
 	var td []string
+	tb := time.Now()
 	fmt.Println("Retrieving", app.ScheduleURL)
 	c := colly.NewCollector()
 	c.OnError(func(_ *colly.Response, err error) {
@@ -21,5 +23,7 @@ func Retrieve() []string {
 	})
 	err := c.Visit(app.ScheduleURL)
 	helpers.CheckError("[shipping.Retrieve.colly.Visit()] ", err)
+	te := time.Since(tb)
+	fmt.Printf("Time to retrieve: %.3g seconds\n", te.Seconds())
 	return td
 }

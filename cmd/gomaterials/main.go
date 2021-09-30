@@ -19,7 +19,7 @@ func main() {
 	setup()
 	run()
 	et := time.Since(start)
-	fmt.Printf("ET: %.3g seconds\n", et.Seconds())
+	fmt.Printf("Total runtime: %.3g seconds\n", et.Seconds())
 	helpers.PrintMemUsage()
 }
 

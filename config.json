@@ -1,6 +1,6 @@
 {
     "AppVersion":"Materials 4.2 \u00A9 2021 Michael N. Rowsey",
-    "DataPath":"/Users/michael/Dropbox/gomaterials/data/",
+    "DataPath":"./data/",
     "Debug":false,
     "Backlog":"bl.txt",
     "Bits": 64,
