@@ -13,7 +13,6 @@ import (
 func Retrieve() []string {
 	var td []string
 	tb := time.Now()
-	fmt.Println("Retrieving", app.ScheduleURL)
 	c := colly.NewCollector()
 	c.OnError(func(_ *colly.Response, err error) {
 		fmt.Println("[shipping.Retrieve.colly()] ", err.Error())
@@ -24,6 +23,6 @@ func Retrieve() []string {
 	err := c.Visit(app.ScheduleURL)
 	helpers.CheckError("[shipping.Retrieve.colly.Visit()] ", err)
 	te := time.Since(tb)
-	fmt.Printf("Time to retrieve: %.3g seconds\n", te.Seconds())
+	fmt.Printf("Schedule retrieved in %.3g seconds\n", te.Seconds())
 	return td
 }
