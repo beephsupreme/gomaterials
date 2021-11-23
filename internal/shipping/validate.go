@@ -15,6 +15,9 @@ func Validate(S [][]string) [][]string {
 	m, s := MakeValidationStructures(V)
 	for _, pn := range S[1:] {
 		found := false
+		if strings.Contains(pn[0], "EX-SPH-CL") {
+			pn[0] = "EX-SPH-CL"
+		}
 		for i := 1; i < len(s); i++ {
 			if pn[app.PN] == s[i] {
 				found = true
@@ -24,6 +27,7 @@ func Validate(S [][]string) [][]string {
 		if strings.Contains(pn[app.PN], "RV-SEALANT") {
 			found = true
 		}
+
 		if !found {
 			if _, ok := m[pn[app.PN]]; !ok {
 				log.Fatal("[shipping.Validate() item not found]: ", pn[app.PN])
