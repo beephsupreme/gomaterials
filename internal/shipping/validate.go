@@ -15,16 +15,39 @@ func Validate(S [][]string) [][]string {
 	m, s := MakeValidationStructures(V)
 	for _, pn := range S[1:] {
 		found := false
+
+		// These items don't parse correctly.
 		if strings.Contains(pn[0], "EX-SPH-CL") {
 			pn[0] = "EX-SPH-CL"
 		}
+		if strings.Contains(pn[0], "EX-SPH-FR") {
+			pn[0] = "EX-SPH-FR"
+		}
+		if strings.Contains(pn[0], "EX-G14-FR") {
+			pn[0] = "EX-G14-FR"
+		}
+		if strings.Contains(pn[0], "EX-G14-CL") {
+			pn[0] = "EX-G14-CL"
+		}
+		if strings.Contains(pn[0], "EX-S14-CL") {
+			pn[0] = "EX-S14-CL"
+		}
+		if strings.Contains(pn[0], "EX-S14-FR") {
+			pn[0] = "EX-S14-FR"
+		}
+
 		for i := 1; i < len(s); i++ {
 			if pn[app.PN] == s[i] {
 				found = true
 				break
 			}
 		}
+
+		// These items get a pass.
 		if strings.Contains(pn[app.PN], "RV-SEALANT") {
+			found = true
+		}
+		if strings.Contains(pn[app.PN], "Sample") {
 			found = true
 		}
 
